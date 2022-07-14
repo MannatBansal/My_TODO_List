@@ -1,0 +1,41 @@
+<!--component to view all items which are added in todo list-->
+
+<div class="item">
+    
+  <div class="row">
+    <div class="col-md-7">
+    <input [id]="item.description" type="checkbox" (change)="item.done = !item.done" [checked]="item.done" />
+    <label [for]="item.description">{{item.description}}</label>
+    </div>
+    
+    <div class="col-md-5">
+    <div class="btn-wrapper" *ngIf="!editable">
+      <div class="example-button-row">
+        <div class="example-flex-container">
+          <div class="example-button-container">
+      <button mat-mini-fab color="primary" aria-label="Example icon button with an edit icon" (click)="editable = !editable">
+        <mat-icon>edit</mat-icon></button></div>
+
+        <div class="example-button-container">
+      <button mat-mini-fab color="warn" aria-label="Example icon button with a delete icon" (click)="remove.emit()">
+        <mat-icon>delete</mat-icon>
+      </button></div>
+      <!---<button class="btn btn-warn" (click)="remove.emit()">Delete</button>-->
+    </div></div></div>
+    </div>
+    
+    </div>
+  
+    <!-- This section shows only if user clicks Edit button -->
+    <div *ngIf="editable">
+      <input class="sm-text-input" placeholder="edit item" [value]="item.description" #editedItem (keyup.enter)="saveItem(editedItem.value)">
+  
+      <div class="btn-wrapper">
+        <button class="btn" (click)="editable = !editable">Cancel</button>
+        <button class="btn btn-save" (click)="saveItem(editedItem.value)">Save</button>
+      </div>
+    </div>
+
+  </div>
+  
+  

@@ -1,0 +1,75 @@
+<h1>todo-app is running</h1>
+
+<!--div to add items in the list-->
+<div class="container">
+<mat-card class="example-card">
+<!--<div class="additem">-->
+  <mat-card-title>ToDo List</mat-card-title>
+
+<!--label for="addItemInput">
+  What would you like to do today?</label>-->
+
+  <mat-card-subtitle>
+    What would you like to do today?
+  </mat-card-subtitle>
+
+<!--div class="addtxt">-->
+
+
+  <form class="example-form">
+  <mat-form-field class="example-full-width" appearance="fill">
+  <input matInput
+  #newItem
+  
+  placeholder="add an item"
+  (keyup.enter)="addItem(newItem.value); newItem.value = ''"
+  
+/>
+</mat-form-field>
+  </form>
+
+<mat-card-actions align="end">
+<button mat-raised-button color="primary" (click)="addItem(newItem.value)">Add</button>
+</mat-card-actions>
+<!--</div><hr>-->
+</mat-card>
+
+<div class="cont">
+<!-- Buttons that show all, still to do, or done items on click -->
+<mat-button-toggle-group name="filter" aria-label="filter">
+  <mat-button-toggle
+    value="all"
+    [class.active]="filter == 'all'"
+    (click)="filter = 'all'">
+    All
+  </mat-button-toggle>
+
+
+  <mat-button-toggle
+  value="active"
+    [class.active]="filter == 'active'"
+    (click)="filter = 'active'">
+    To Do
+  </mat-button-toggle>
+
+  <mat-button-toggle
+  value="done"
+    [class.active]="filter == 'done'"
+    (click)="filter = 'done'">
+    Done
+    </mat-button-toggle>
+  </mat-button-toggle-group>
+</div></div>
+<br><br>
+<!--div to show the added items stored in the component-->
+<div class="additem2">
+  <h2>{{items.length}} <span *ngIf="items.length === 1; else elseBlock">item</span>
+    <ng-template #elseBlock>items</ng-template></h2>
+    
+    <ul class="list-group">
+      <li class="list-group-item" *ngFor="let item of items">
+        <todo-item (remove)="remove(item)" [item]="item"></todo-item>
+      </li>
+    </ul>
+    
+
